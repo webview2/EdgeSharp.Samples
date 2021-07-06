@@ -1,0 +1,38 @@
+<div class="container justify-content-center mt-3">
+    <p>
+        <a class="btn btn-primary btn-sm" role="button" href="#moviecreate" onclick="navigateTo('/moviecreate'); return false;">Create New</a>
+    </p>
+
+    <div class="row">
+        <div class="col-3">
+            <select class="form-select col-sm-6" id="movieGenre" name="MovieGenre">
+                <option value="">All</option>
+                <option>Romantic Comedy</option>
+                <option>Comedy</option>
+                <option>Western</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <div class="col-auto input-group mb-3">
+                <input id="searchString" type="text" class="form-control" placeholder="Search title" aria-label="Search title" aria-describedby="button-addon" name="SearchString" value="" />
+                <input class="btn btn-outline-primary btn-sm" type="button" id="button-addon2=" value="Filter" onclick="loadMovies(); return false;" />
+            </div>
+        </div>
+    </div>
+
+    <table id="moviesTable" class='table'>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Release Date</th>
+                <th>Genre</th>
+                <th>Price</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
