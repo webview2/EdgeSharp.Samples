@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index - Movie App</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./css/prism-okaidia.css" />
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/prism.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/query.min.js"></script>
+
+    <script>
+        const routes = {
+            '/': 'pages/home.html',
+            '/movies': 'pages/movies.html',
+            '/moviedetails': 'pages/moviedetails.html',
+            '/moviecreate': 'pages/moviecreate.html',
+            '/movieedit': 'pages/movieedit.html',
+            '/moviedelete': 'pages/moviedelete.html',
+            '/error': 'pages/error.html'
+        };
+
+        const scripts = {
+            '/': 'pages/home.js',
+            '/movies': 'pages/movies.js',
+            '/moviedetails': 'pages/moviedetails.js',
+            '/moviecreate': 'pages/moviecreate.js',
+            '/movieedit': 'pages/movieedit.js',
+            '/moviedelete': 'pages/moviedelete.js',
+        };
+
+        const pageContents = {};
+
+        const navigateTo = async (pathname) => {
+            if (pageContents[pathname] === undefined) {
+                try {
+                    pageContents[pathname] = await loadPage(routes[pathname]);
+                } catch (err) {
+                    pathname = '/error';
+                    pageContents[pathname] = await loadPage(routes[pathname]);
+                }
+            }
+            rootDiv.innerHTML = pageContents[pathname];
+            loadPageScript(pathname);
+        };
+
+        const changeIpc = (ipcoption) => {
+            tempData.selectedIpcOption = ipcoption;
+            document.getElementById("hostobject").checked = 'hostobject' === ipcoption;
+            document.getElementById("httpclient").checked = 'httpclient' === ipcoption;
+            document.getElementById("postmessage").checked = 'postmessage' === ipcoption;
+        };
+
+        const loadPageScript = async (pathname) => {
+            if (pageContents[pathname] === undefined) {
+                try {
+                    pageContents[pathname] = await loadPage(scripts[pathname]);
+                } catch (err) {
+                }
+            }
+
+            if (pageContents[pathname] !== undefined) {
+                let newScript = document.createElement("script");
+                newScript.type = "text/javascript";
+                newScript.src = scripts[pathname];
+                newScript.innerHTML = null;
+                newScript.id = "pageScript";
+
+                document.getElementById("pageScriptTag").innerHTML = "";
+                document.getElementById("pageScriptTag").appendChild(newScript);
+            }
+        };
+
+        function loadPage(page) {
+            return $.get(page);
+        }
+
+        var tempData = {};
+        tempData.selectedIpcOption = 'hostobject';
+        tempData.urlQueryPart = null;
+        tempData.content = null;
+
+    </script>
+</head>
+<body>
+    <header>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="#">EdgeSharp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#home" onclick="navigateTo('/'); return false;">home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#movies" onclick="navigateTo('/movies'); return false;">movies</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ipc options</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#" onclick="changeIpc('hostobject'); return false;"><input id="hostobject" name="ipcoption" type="radio" checked /><span> host object</span></a></li>
+                                <li><a class="dropdown-item" href="#" onclick="changeIpc('httpclient'); return false;"><input id="httpclient" name="ipcoption" type="radio" /><span> http client</span></a></li>
+                                <li><a class="dropdown-item" href="#" onclick="changeIpc('postmessage'); return false;"><input id="postmessage" name="ipcoption" type="radio" /><span> post message</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">exit</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="http://edgesharp.com/reload">reload</a></li>
+                                <li><a class="dropdown-item" href="http://edgesharp.com/exit">exit</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3" id="root">
+        </main>
+    </div>
+
+    <!--Load Home Page>-->
+    <script>
+        const rootDiv = document.getElementById('root');
+        const main = async () => {
+            pageContents['/'] = await loadPage(routes['/']);
+            rootDiv.innerHTML = pageContents['/'];
+            loadPageScript('/');
+        };
+
+        // Load index page
+        main();
+    </script>
+
+    <div id="pageScriptTag">
+        <script id="pageScript" type="text/javascript"></script>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<template>
+ <div>
+    <div class="text-center mt-5">
+      <h1 class="display-3">EdgeSharp</h1>
+      <p class="lead text-muted">Build .NET Win32/WinForms/WPF WebView2 HTML5 Desktop Apps</p>
+
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+          <table class="table table-sm">
+            <tbody>
+              <tr>
+                <td><small class="text-muted">WebView2 SDK Version: {{sdkVersion}}</small></td>
+              </tr>
+              <tr>
+                <td><small class="text-muted">WebView2 Runtime Version: {{runtimeVersion}}</small></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
+      <div class="text-center">
+          <a href="https://github.com/edgesharp/EdgeSharp" class="btn btn-primary btn-sm" role="button" style='margin: 5px;'>more info</a>
+      </div>
+    </div>
+</div>
+</template>
+
+
+<script>
+var actionClient = require('../services/ActionControllerClient');
+
+export default {
+  data(){
+    return{
+      sdkVersion: '',
+      runtimeVersion: ''
+    }
+  },
+  methods: {
+		getInfoCallback (response) {
+            this.sdkVersion = response.sdk;
+            this.runtimeVersion = response.runtime;
+		}
+	},
+  mounted(){
+    actionClient.get('http://edgesharp.com/info', this.getInfoCallback);
+  }
+}
+</script>

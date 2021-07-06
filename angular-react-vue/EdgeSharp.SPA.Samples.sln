@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgeSharp.Shared", "EdgeSharp.Shared\EdgeSharp.Shared.csproj", "{9B427B22-D103-4F29-B217-CFD861DD4183}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgeSharp.Angular.Sample", "EdgeSharp.Angular.Sample\EdgeSharp.Angular.Sample.csproj", "{4825A98C-C1D2-4D17-88F4-A4CCC462114D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgeSharp.React.Sample", "EdgeSharp.React.Sample\EdgeSharp.React.Sample.csproj", "{7295B189-96F1-4783-A68F-6127D06EC864}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgeSharp.Vue.Sample", "EdgeSharp.Vue.Sample\EdgeSharp.Vue.Sample.csproj", "{B1B950EA-D64D-4067-B7B3-3A25504706D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B427B22-D103-4F29-B217-CFD861DD4183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B427B22-D103-4F29-B217-CFD861DD4183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B427B22-D103-4F29-B217-CFD861DD4183}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9B427B22-D103-4F29-B217-CFD861DD4183}.Debug|x64.Build.0 = Debug|Any CPU
+		{9B427B22-D103-4F29-B217-CFD861DD4183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B427B22-D103-4F29-B217-CFD861DD4183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B427B22-D103-4F29-B217-CFD861DD4183}.Release|x64.ActiveCfg = Release|Any CPU
+		{9B427B22-D103-4F29-B217-CFD861DD4183}.Release|x64.Build.0 = Release|Any CPU
+		{4825A98C-C1D2-4D17-88F4-A4CCC462114D}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{4825A98C-C1D2-4D17-88F4-A4CCC462114D}.Debug|Any CPU.Build.0 = Debug|x64
+		{4825A98C-C1D2-4D17-88F4-A4CCC462114D}.Debug|x64.ActiveCfg = Debug|x64
+		{4825A98C-C1D2-4D17-88F4-A4CCC462114D}.Debug|x64.Build.0 = Debug|x64
+		{4825A98C-C1D2-4D17-88F4-A4CCC462114D}.Release|Any CPU.ActiveCfg = Release|x64
+		{4825A98C-C1D2-4D17-88F4-A4CCC462114D}.Release|x64.ActiveCfg = Release|x64
+		{4825A98C-C1D2-4D17-88F4-A4CCC462114D}.Release|x64.Build.0 = Release|x64
+		{7295B189-96F1-4783-A68F-6127D06EC864}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{7295B189-96F1-4783-A68F-6127D06EC864}.Debug|Any CPU.Build.0 = Debug|x64
+		{7295B189-96F1-4783-A68F-6127D06EC864}.Debug|x64.ActiveCfg = Debug|x64
+		{7295B189-96F1-4783-A68F-6127D06EC864}.Debug|x64.Build.0 = Debug|x64
+		{7295B189-96F1-4783-A68F-6127D06EC864}.Release|Any CPU.ActiveCfg = Release|x64
+		{7295B189-96F1-4783-A68F-6127D06EC864}.Release|x64.ActiveCfg = Release|x64
+		{7295B189-96F1-4783-A68F-6127D06EC864}.Release|x64.Build.0 = Release|x64
+		{B1B950EA-D64D-4067-B7B3-3A25504706D3}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{B1B950EA-D64D-4067-B7B3-3A25504706D3}.Debug|Any CPU.Build.0 = Debug|x64
+		{B1B950EA-D64D-4067-B7B3-3A25504706D3}.Debug|x64.ActiveCfg = Debug|x64
+		{B1B950EA-D64D-4067-B7B3-3A25504706D3}.Debug|x64.Build.0 = Debug|x64
+		{B1B950EA-D64D-4067-B7B3-3A25504706D3}.Release|Any CPU.ActiveCfg = Release|x64
+		{B1B950EA-D64D-4067-B7B3-3A25504706D3}.Release|x64.ActiveCfg = Release|x64
+		{B1B950EA-D64D-4067-B7B3-3A25504706D3}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EF24774-D853-4305-98FB-B5143B267862}
+	EndGlobalSection
+EndGlobal

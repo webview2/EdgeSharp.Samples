@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <ApplicationIcon>edgesharp.ico</ApplicationIcon>
+    <StartupObject />
+    <Platforms>x64</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EdgeSharp" Version="0.9.0" />
+    <PackageReference Include="EdgeSharp.Core" Version="0.9.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.3" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EdgeSharp.Shared\EdgeSharp.Shared.csproj" />
+  </ItemGroup>
+
+   <ItemGroup>
+    <Compile Remove="vueapp\node_modules\**" />
+    <EmbeddedResource Remove="vueapp\node_modules\**" />
+    <None Remove="vueapp\node_modules\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="edgesharp.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MvcMovie.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="DependsOn" DependsOnTargets="ValidateEdgeSharpVue">
+    <Message Text="Target : DependsOn" />
+  </Target>
+
+  <Target Name="ValidateEdgeSharpVue" BeforeTargets="Build">
+    <Message Importance="High" Text="Checking if Node.js is installed.." />
+    <Exec Command="node --version" ContinueOnError="false">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Condition="'$(ErrorCode)' == '0'" Importance="High" Text="Node.js is installed!" />
+
+    <Message Importance="High" Text="Checking if node_modules exists.." />
+    <Message Importance="High" Text="Running npm install, node_modules not found! (this could take a while)" Condition="!Exists('$(ProjectDir)vueapp\node_modules')" />
+    <Exec Command="npm install --silent" Condition="!Exists('$(ProjectDir)vueapp\node_modules')" WorkingDirectory="vueapp" ContinueOnError="false" />
+  </Target>
+
+  <Target Name="DebugEdgeSharpVue" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' ">
+    <Message Importance="High" Text="Building Vue App.." />
+    <Exec Command="npm run build" WorkingDirectory="vueapp" ContinueOnError="false" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+
+    <Message Importance="High" Text="Copying Vue App to debug folder.." />
+    <Exec Command="xcopy &quot;$(ProjectDir)vueapp\dist&quot; &quot;$(TargetDir)dist&quot;   /i /s /r /y /c" />
+  </Target>
+
+  <Target Name="ReleaseEdgeSharpVue" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Release' ">
+    <Exec Command="npm run build" WorkingDirectory="vueapp" ContinueOnError="true" ConsoleToMSBuild="false">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+  </Target>
+
+</Project>

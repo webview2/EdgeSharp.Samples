@@ -1,0 +1,45 @@
+<div class="container justify-content-center mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-secondary" (click)="getMovies('popular', '')">popular</button>
+                    <button type="button" class="btn btn-secondary" (click)="getMovies('toprated', '')">top rated</button>
+                    <button type="button" class="btn btn-secondary" (click)="getMovies('nowplaying', '')">now playing</button>
+                    <button type="button" class="btn btn-secondary" (click)="getMovies('upcoming', '')">upcoming</button>
+                </div>
+            </div>
+            <div class="col">
+              <div class="form-group d-flex">
+                <input  [(ngModel)]="_searchText" type="text" class="form-control me-sm-2" placeholder="search movies">
+                <button type="button" class="btn btn-secondary my-2 my-sm-0" (click)="searchMovies()">Search</button>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+   <div class="moviesCointainer container-fluid  mt-3">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div *ngFor="let item of _moviesList">
+
+                <!-- Card -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="text-center">
+                            <img src="{{item.PosterUrl}}" alt="..." title="{{ item.Title }}" style="width: 100%;" />
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title text-info">{{ item.Title }}</h4>
+                            <h6 class="card-subtitle text-muted">{{ item.ReleaseDate }}</h6>
+                            <p class="card-text mt-4"><b>Popularity</b>: {{ item.Popularity }}<br /><b>Vote Count</b>:  {{ item.VoteCount }} <br /><b>Vote Average</b>:  {{ item.VoteAverage }}
+                            <br /><br /><a class="btn btn-primary" href="{{item.HomePage}}">Homepage</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+
+
+</div>
